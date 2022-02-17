@@ -3,10 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Post;
-use App\Http\Requests\StorePostRequest;
+use App\Models\User;
 
-class postController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,10 +14,7 @@ class postController extends Controller
      */
     public function index()
     {
-        // select  * from posts
-        $post = Post::all();
-        return view('posts.index',["data"=>$post]);
-        // return view 
+        //
     }
 
     /**
@@ -29,7 +25,7 @@ class postController extends Controller
     public function create()
     {
         //
-        return view("posts.create");
+        return view("users.create");
     }
 
     /**
@@ -38,18 +34,15 @@ class postController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StorePostRequest $request)
-     {  
-       
-        //store
-        $post= new Post;
-        $post->title = $request->title;
-        $post->description=$request->description;
-        $post->user_id=1;
-        $post->save();
-    
-        return redirect()->route("posts.index");
-    
+    public function store(Request $request)
+    {
+        //
+        $user=new User;
+        $user->name=$request->name;
+        $user->email=$request->email;
+        $user->password=$request->password;
+        $user->save();
+        return "done";
     }
 
     /**
@@ -60,12 +53,7 @@ class postController extends Controller
      */
     public function show($id)
     {
-        //Post::where("id",$id);
-        //Post::where("title","title 3 ");
-        //Post::where("salaray",">","5000");
-        $data = Post::find($id);
-       return view("posts.show",$data);
-       
+        //
     }
 
     /**
@@ -76,9 +64,7 @@ class postController extends Controller
      */
     public function edit($id)
     {
-        //edit
-        $data = Post::find($id);
-        return view("posts.edit",$data);
+        //
     }
 
     /**
@@ -88,15 +74,9 @@ class postController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(StorePostRequest $request, $id)
+    public function update(Request $request, $id)
     {
         //
-        $data = Post::find($id);
-        $data->title=$request->title;
-        $data->description=$request->description;
-        $data->updated_at=$request->updated_at;
-        $data->save();
-        return redirect()->route('posts.index');
     }
 
     /**
@@ -107,8 +87,6 @@ class postController extends Controller
      */
     public function destroy($id)
     {
-        Post::destroy($id);
-        return redirect()->route('posts.index');
+        //
     }
-
 }

@@ -3,7 +3,17 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\postController;
+use App\Http\Controllers\UserController;
+
+
 Route::resource('posts', postController::class);
+
+
+Route::get('/users/create',[UserController::class,"create"]);
+
+Route::post('/users',[UserController::class,"store"]);
+
+
 /*
 // get all  posts
 Route::get('/posts',[postController::class,"index"])->name('posts.index');
