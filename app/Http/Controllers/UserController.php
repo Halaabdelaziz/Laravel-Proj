@@ -15,6 +15,8 @@ class UserController extends Controller
     public function index()
     {
         //
+        $post = User::all();
+        return view('user.index',["data"=>$post]);
     }
 
     /**
@@ -88,5 +90,7 @@ class UserController extends Controller
     public function destroy($id)
     {
         //
+        User::destroy($id);
+        return redirect()->route('user.index');
     }
 }
